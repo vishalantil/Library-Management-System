@@ -1,5 +1,6 @@
 package com.backend.library_management_system.Controller;
 
+import com.backend.library_management_system.DTO.StudentRequestDto;
 import com.backend.library_management_system.DTO.StudentResponseDto;
 import com.backend.library_management_system.DTO.StudentUpdateEmailRequestDto;
 import com.backend.library_management_system.Entity.Student;
@@ -17,8 +18,8 @@ public class StudentController {
     StudentService studentService;
 
     @PostMapping("/add")
-    public String addStudent(@RequestBody Student student){
-        studentService.addStudent(student);
+    public String addStudent(@RequestBody StudentRequestDto studentRequestDto){
+        studentService.addStudent(studentRequestDto);
         return "Student has been added";
     }
 
@@ -39,7 +40,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/delete")
-    public String deleteStudent(@RequestBody int id){
+    public String deleteStudent(@RequestParam int id){
         return studentService.deleteStudent(id);
     }
 }

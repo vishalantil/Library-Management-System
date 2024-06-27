@@ -1,5 +1,6 @@
 package com.backend.library_management_system.Service;
 
+import com.backend.library_management_system.DTO.StudentRequestDto;
 import com.backend.library_management_system.DTO.StudentResponseDto;
 import com.backend.library_management_system.DTO.StudentUpdateEmailRequestDto;
 import com.backend.library_management_system.Entity.LibraryCard;
@@ -17,15 +18,19 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    public void addStudent(Student student){
+    public void addStudent(StudentRequestDto studentRequestDto){
 
         // Set the values of card
+        Student student = new Student();
+        student.setAge(studentRequestDto.getAge());
+        student.setName(studentRequestDto.getName());
+        student.setEmail(studentRequestDto.getEmail());
+        student.setDepartment(studentRequestDto.getDepartment());
+
         LibraryCard card = new LibraryCard();
         card.setStatus(CardStatus.ACTIVATED);
-        card.setValidtill("03/2025");
         card.setStudent(student);
 
-        // Set the card attribute in student
         student.setCard(card);
 
         studentRepository.save(student);

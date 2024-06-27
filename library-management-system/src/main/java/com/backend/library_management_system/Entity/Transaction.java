@@ -1,44 +1,39 @@
 package com.backend.library_management_system.Entity;
 
-import com.backend.library_management_system.Enum.Genre;
+import com.backend.library_management_system.Enum.TransactionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Book {
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    int id;
 
-    private String title;
-
-    private int price;
+    private String transactionNumber;
 
     @Enumerated(EnumType.STRING)
-    private Genre genre;
+    TransactionStatus transactionStatus;
 
-    private Boolean isIssued;
+    private Date transactionDate;
+
+    private boolean isIssueOperation;
 
     @ManyToOne
     @JoinColumn
-    Author author;
-
-    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
-    List<Transaction> transaction = new ArrayList<>();
+    Book book;
 
     @ManyToOne
     @JoinColumn
     LibraryCard card;
-
 }
