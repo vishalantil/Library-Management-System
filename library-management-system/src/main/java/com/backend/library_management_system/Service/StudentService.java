@@ -65,7 +65,7 @@ public class StudentService {
     public String deleteStudent(int id){
 
          Student student = studentRepository.findById(id).get();
-          studentRepository.deleteById(id);
+         studentRepository.deleteById(id);
 
          return student.getName() + " " + "is deleted.";
     }
